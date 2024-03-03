@@ -2,7 +2,6 @@ import re
 import csv
 
 # Loading and converting data
-
 with open("assets/nyt_titles.tsv", 'r') as myfile:
     with open("assets/nyt_titles.csv", 'w') as csv_file:
         for line in myfile:
@@ -158,8 +157,6 @@ for row in parsed_authors_data:
         elif " edited " in parsed_first[i] or " edited " in parsed_last[i]:
             manual_parse.append(row["id"])
 
-print(manual_parse)
-
 for id in manual_parse:
     for row in parsed_authors_data:
         if row["id"] == id:
@@ -178,7 +175,6 @@ for id in manual_parse:
             row["author_first_name"] = [first]
             row["author_last_name"] = [last]
             row["author_count"] = 1
-            print(row)
 
 for row in parsed_authors_data:
     if row["id"] == "5511":
@@ -190,19 +186,16 @@ for row in parsed_authors_data:
     if row["id"] == "7236":
         row["author_first_name"] = ["Jimmy"]
         row["author_last_name"] = ["Buffett"]
-        print(row)
 
 for row in parsed_authors_data:
     if row["id"] == "7260":
         row["author_first_name"] = ["Clive, Paul"]
         row["author_last_name"] = ["Cussler, Kemprecos"]
-        print(row)
 
 for row in parsed_authors_data:
     if row["id"] == "7278":
         row["author_first_name"] = ["Bill, Thomas"]
         row["author_last_name"] = ["Adler, Chastain"]
-        print(row)
 
 
 # Associating race and gender with names
@@ -218,6 +211,7 @@ def associate_titles_gender(data):
         row["author_gender"] = []
         first_name = row["author_first_name"]
         for name in first_name:
+            gender = None
             gender_count = 0
             for name_row in names_gender_rows:
                 if name == name_row["\ufeffName"]:
@@ -229,9 +223,6 @@ def associate_titles_gender(data):
     return associated_gender_data
 
 
-associated_gender_nyt_rows = associate_titles_gender(parsed_authors_data)
-
-
 def associate_titles_race(data):
     """
     Takes NYT bestseller data (parsed through CSV dictreader)
@@ -239,4 +230,54 @@ def associate_titles_race(data):
 
     Returns copy of data w/ associations
     """
-    associated_race_data
+    associated_race_data = []
+    for row in data:
+        # Initialize empty column for race data
+        row["author_race"] = []
+
+        # Get last names
+        last_name = row["author_last_name"]
+
+        for name in last_name:
+            max_race = None
+            for surname_row in surnames_race_rows:
+                if name.strip(".").upper() == surname_row["name"]:
+                    name_race_perc = {"white": surname_row["pctwhite"],
+                                      "black": surname_row["pctblack"],
+                                      "api": surname_row["pctapi"],
+                                      "aian": surname_row["pctaian"],
+                                      "2prace": surname_row["pct2prace"],
+                                      "hispanic": surname_row["pcthispanic"]}
+                    max_race = max(name_race_perc, key=name_race_perc.get)
+            row["author_race"].append(max_race)
+        associated_race_data.append(row)
+    return associated_race_data
+
+
+associated_gender_nyt_rows = associate_titles_gender(parsed_authors_data)
+associated_race_nyt_rows = associate_titles_race(associated_gender_nyt_rows)
+
+# Count rows w/ an unassociated gender
+unassociated_gender_rows_count = 0
+unassociated_gender_names = []
+for row in associated_gender_nyt_rows:
+    if None in row["author_gender"]:
+        unassociated_gender_rows_count += 1
+        unassociated_gender_names.append(row["author_first_name"])
+
+# Count rows w/ an unassociated race
+unassociated_race_rows_count = 0
+unassociated_race_surnames = []
+for row in associated_race_nyt_rows:
+    if None in row["author_race"]:
+        unassociated_race_rows_count += 1
+        unassociated_race_surnames.append(row["author_last_name"])
+
+print("Count of titles w/ unassociated gender: ",
+      unassociated_gender_rows_count)
+print("Count of titles w/ unassociated race: ",
+      unassociated_race_rows_count)
+
+# Data analysis
+
+
