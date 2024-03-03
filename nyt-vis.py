@@ -17,25 +17,54 @@ for entry in df["author_gender"]:
 
 years = range(1931, 2021)
 overall_gender_year_count = []
-for year in years:
-    year_df = df[df["year"] == year]["author_gender"]
-    year_male_ct = 0
-    year_female_ct = 0
-    year_unknown_ct = 0
-    for entry in year_df:
-        if "M" in entry:
-            year_male_ct += 1
-        elif "F" in entry:
-            year_female_ct += 1
-        elif "None" in entry:
-            year_unknown_ct += 1
-    all_counts = [year, year_male_ct, year_female_ct, year_unknown_ct]
-    overall_gender_year_count.append(all_counts)
+overall_first_rank_count = []
+overall_debut_first_count = []
 
+for year in years:
+    year_by_gender_df = df[df["year"] == year]["author_gender"]
+    gender_and_bestseller_df = df[(df["year"] == year) & (df["best_rank"] == 1)]["author_gender"]
+    debut_first_df = df[(df["year"] == year) & (df["debut_rank"] == 1)]["author_gender"]
+
+    all_counts = [year, 0, 0, 0]
+    first_rank_counts = [year, 0, 0, 0]
+    debut_first_counts = [year, 0, 0, 0]
+    for entry in year_by_gender_df:
+        if "M" in entry:
+            all_counts[1] += 1
+            first_rank_counts[1] += 1
+            debut_first_counts[1] += 1
+        elif "F" in entry:
+            all_counts[2] += 1
+            first_rank_counts[2] += 1
+            debut_first_counts[2] += 1
+        elif "None" in entry:
+            all_counts[3] += 1
+            first_rank_counts[3] += 1
+            debut_first_counts[3] += 1
+    overall_gender_year_count.append(all_counts)
+    overall_first_rank_count.append(first_rank_counts)
+    overall_debut_first_count.append(debut_first_counts)
+
+# Gender of authors on list
 year_gender_df = pd.DataFrame(overall_gender_year_count,
                               columns=["Year", "Male Authors",
                                        "Female Authors",
                                        "Authors w/ Unknown Gender"])
+print(year_gender_df)
+
+# Gender of authors that had a w/ first ranking
+first_rank_df = pd.DataFrame(overall_first_rank_count,
+                             columns=["Year", "Male Authors",
+                                      "Female Authors",
+                                      "Authors w/ Unknown Gender"])
+print(first_rank_df)
+
+# Gender of authors that debuted w/ first ranking
+debut_first_df = pd.DataFrame(overall_debut_first_count,
+                              columns=["Year", "Male Authors",
+                                       "Female Authors",
+                                       "Authors w/ Unknown Gender"])
+print(debut_first_df)
 
 print("Number of male authors: ", male_count)
 print("Number of female authors: ", female_count)
