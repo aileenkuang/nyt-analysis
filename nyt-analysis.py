@@ -256,10 +256,17 @@ def associate_titles_race(data):
 
 associated_gender_nyt_rows = associate_titles_gender(parsed_authors_data)
 associated_race_nyt_rows = associate_titles_race(associated_gender_nyt_rows)
+print(associated_race_nyt_rows)
 
-with open("assets/associated_nyt_titles.csv", "w") as associated_csv:
+with open("assets/associated_nyt_titles.csv", "w", newline="") as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerow(["id", "title", "author", "year", "total_weeks",
+                     "first_week", "debut_rank", "best_rank", "author_count",
+                     "author_first_name", "author_last_name", "author_gender",
+                     "author_race"])
     for row in associated_race_nyt_rows:
-        associated_csv.write(row)
+        data = [value for value in row.values()]
+        writer.writerow(data)
 
 # Count rows w/ an unassociated gender
 unassociated_gender_rows_count = 0
@@ -279,9 +286,9 @@ for row in associated_race_nyt_rows:
         unassociated_race_rows_count += 1
         unassociated_race_surnames.append(row["author_last_name"])
 
+print(unassociated_race_surnames)
+
 print("Count of titles w/ unassociated gender: ",
       unassociated_gender_rows_count)
 print("Count of titles w/ unassociated race: ",
       unassociated_race_rows_count)
-
-print(associated_race_nyt_rows)
