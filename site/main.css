@@ -56,7 +56,7 @@
 /* Style page content */
 
 .landing {
-    background-color: #464E2E;
+    background-color: #3D0C11;
     color: #FFF5E4;
     margin: -10px;
     padding-top: 40px;
@@ -68,12 +68,22 @@
 .content {
     padding: 14px;
     font-size: 22px;
+    text-indent: 125px;
     min-height: 100vh;
+    color: #3D0C11;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 952px) {
     .landing {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 40px;
+        padding-right: 40px;
+        text-indent: 0;
+    }
+
+    .content {
         padding-top: 20px;
         padding-bottom: 20px;
         padding-left: 40px;

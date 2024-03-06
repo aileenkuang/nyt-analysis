@@ -1,3 +1,6 @@
+import seaborn as sns
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 import pandas as pd
 
 data_file = open("assets/associated_nyt_titles.csv", "r")
@@ -56,26 +59,32 @@ for year in years:
     overall_first_rank_count.append(first_rank_counts)
     overall_debut_first_count.append(debut_first_counts)
 
+# Individual, filtered data frames
+
 # Gender of authors on list
 year_gender_df = pd.DataFrame(overall_gender_year_count,
                               columns=["year", "male_count",
                                        "female_count",
                                        "unknown_count"])
-print(year_gender_df)
+year_gender_df.set_index('year', inplace=True)
 
 # Gender of authors that had a w/ first ranking
 first_rank_df = pd.DataFrame(overall_first_rank_count,
                              columns=["year", "male_count",
                                       "female_count",
                                       "unknown_count"])
-print(first_rank_df)
+first_rank_df.set_index("year", inplace=True)
 
 # Gender of authors that debuted w/ first ranking
 debut_first_df = pd.DataFrame(overall_debut_first_count,
                               columns=["year", "male_count",
                                        "female_count",
                                        "unknown_count"])
-print(debut_first_df)
+debut_first_df.set_index("year", inplace=True)
+
+# Collection of top ten titles on list in each year
+# Top ten measured by: most time on the list, grabbed first ten for
+# Each year
 
 titles_in_yearly_top_ten = []
 for year in years:
@@ -89,9 +98,6 @@ for year in years:
                          entry["author_race"]]
         titles_in_yearly_top_ten.append(entry_as_list)
 
-# Collection of top ten titles on list in each year
-# Top ten measured by: most time on the list, grabbed first ten for
-# Each year
 top_ten_df = pd.DataFrame(titles_in_yearly_top_ten,
                           columns=["year", "title", "author",
                                    "total_weeks", "author_gender",
@@ -110,45 +116,51 @@ for year in years:
             gender_counts[3] += 1
     top_ten_gender_counts.append(gender_counts)
 
+# Gender of authors in top ten
 top_ten_gender_df = pd.DataFrame(top_ten_gender_counts,
                                  columns=["year", "male_count",
                                           "female_count", "unknown_count"])
 print(top_ten_gender_df)
 
-# Author race
-white_count = 0
-black_count = 0
-api_count = 0
-aian_count = 0
-twoprace_count = 0
-hispanic_count = 0
-unknown_count = 0
-for entry in df["author_race"]:
-    if "white" in entry:
-        white_count += 1
-    elif "black" in entry:
-        black_count += 1
-    elif "api" in entry:
-        api_count += 1
-    elif "aian" in entry:
-        aian_count += 1
-    elif "2prace" in entry:
-        twoprace_count += 1
-    elif "hispanic" in entry:
-        hispanic_count += 1
-    elif "None" in entry:
-        unknown_count += 1
+# Plots
 
-# Print statements
-print()
-print("Number of male authors: ", male_count)
-print("Number of female authors: ", female_count)
-print("Number of authors with unknown gender: ", unknown_count)
-print()
-print("Number of white authors: ", white_count)
-print("Number of Black authors: ", black_count)
-print("Number of API authors: ", api_count)
-print("Number of AIAN authors: ", aian_count)
-print("Number of 2prace authors: ", twoprace_count)
-print("Number of Hispanic authors: ", hispanic_count)
-print("Number of authors w/ unknown race: ", unknown_count)
+# Gender of authors on the list (overall)
+sns.set_theme(style="darkgrid")
+sns.lineplot(data=year_gender_df)
+plt.title("Percieved gender of hardcover fiction bestseller authors \
+          (1931-2020)")
+plt.xlabel("Year")
+plt.ylabel("Count")
+plt.show()
+
+# Gender of authors that reached first ranking
+sns.lineplot(data=first_rank_df)
+plt.title("Percieved gender of #1 hardcover fiction bestseller authors \
+          (1931-2020)")
+plt.xlabel("Year")
+plt.ylabel("Count")
+plt.show()
+
+# Gender of authors that debuted w/ first ranking
+sns.lineplot(data=debut_first_df)
+plt.title("Percieved gender of debut #1 hardcover fiction bestseller authors \
+          (1931-2020)")
+plt.xlabel("Year")
+plt.ylabel("Count")
+plt.show()
+
+# Gender of authors of top ten books over time
+male_bar = sns.barplot(x="year", y="male_count", data=top_ten_gender_df, color="darkblue")
+female_bar = sns.barplot(x="year", y="female_count", data=top_ten_gender_df, color="lightblue")
+unknown_bar = sns.barplot(x="year", y="unknown_count", data=top_ten_gender_df, color="green")
+
+top_bar = mpatches.Patch(color='darkblue', label='male')
+middle_bar = mpatches.Patch(color='lightblue', label='female')
+bottom_bar = mpatches.Patch(color="green", label="unknown")
+plt.legend(handles=[top_bar, middle_bar, bottom_bar])
+
+plt.title("Percieved gender of top ten hardcover fiction bestseller authors \
+          (1931-2020)")
+plt.xlabel("Year")
+plt.ylabel("Count")
+plt.show()
