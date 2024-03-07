@@ -38,7 +38,7 @@
 .footer a {
     display: inline-block;
     color: #6D2932;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family:Verdana, Tahoma, sans-serif;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -62,16 +62,17 @@
     padding-top: 40px;
     padding-bottom: 40px;
     text-indent: 150px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family:sans-serif;
 }
 
 .content {
     padding: 14px;
     font-size: 22px;
-    text-indent: 125px;
+    margin-left: 125px;
+    margin-right: 125px;
     min-height: 100vh;
     color: #3D0C11;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family:sans-serif;
 }
 
 @media screen and (max-width: 952px) {
