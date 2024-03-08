@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <title>NYT Hardcover Fiction Bestsellers Analysis</title>
-    <link rel="stylesheet" href="main.css">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<body style="background-color: #E8D8C4;">
+<body>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
     <!-- Nav bar -->
     <div class="topnav" id="topNav">
         <a href="index.html">analysis</a>
@@ -19,11 +29,71 @@
     <!-- Page content -->
 
     <div class="content">
-        <h1>About the Data</h1>
+        <div class="story-title"> <h1> About the Data</h1></div>
+        
+        <br> 
 
-        <h2>Data Sources</h2>
-        <h2>Methodology</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <h3 class="card-header">Data Sources</h3>
+                        <div class="card-body">
+                            <div class="card-text">
+                                This project utilizes the <a href="https://view.data.post45.org/nyttitle" style="color: white; text-decoration: underline;">New York Times Hardcover Fiction: Titles</a> 
+                                data set from the Post45 Data Collective, which records each title on the bestselling hardcover fiction list from 1931 to 2020. It contains 7431 entries.
+                                For each entry, the data set tracks the author name, the first year the book appeared on the list, the total number
+                                of weeks the book was on the list, the first week it appeared on the list, its debut ranking, and its best ranking.
+                                This data set contains information about each unique title, which means that an author can appear multiple times
+                                within the data. 
 
+                                <br>
+                                <br>
+
+                                I also utilize the <a href="https://archive.ics.uci.edu/dataset/591/gender+by+name" style="color: white; text-decoration: underline;">Gender by Name</a> 
+                                data set from the UC Irvine Machine Learning Repository, which associates first names with genders. For each name, the data set tracks
+                                whether it is a male or female name, the raw count of the name, and the probability of the name being associated with that gender.
+                                The names that appear in this data set were taken from open-source government data from the United States, Canada, United Kingdom,
+                                and Australia. The source names data is from the years 1880 to 2019. This data set also does not record genders beyond male and female,
+                                which is problematic because it is extremely binary and excludes people who exist beyond male-female categories.
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <h3 class="card-header">Methodology</h3>
+                        <div class="card-body">
+                            <div class="card-text">
+                                I downloaded both data sets from their respective websites. While the Gender by Name data set was provided as a CSV file,
+                                the New York Times data set was provided as a TSV file. In my data cleaning process, I first converted the latter data to a CSV file. 
+
+                                <br>
+                                <br>
+
+                                Furthermore, because my project analyzes perceptions of authors’ genders, I needed to extrapolate author first names from the
+                                New York Times data set. So, for each record in that data set, I parsed and split the entry in the author name column into the author’s
+                                first and last name. I did this, too, for books with multiple authors. Because my cleaning process was automated, there may be
+                                discrepancies between my data and authors’ actual first names – for example, my program may not have accurately recorded an author’s
+                                first name if it had multiple segments (ex. Mary Jane). However, due to the size of the New York Times data set, these discrepancies
+                                do not make a significant difference in the takeaways from the data.
+
+                                <br>
+                                <br>
+
+                                After identifying author first names, I combined the New York Times data set with some columns of the Gender by Name data set.
+                                For each entry, if the author's first name was more often male than female, I marked it as male, and vice versa. However,
+                                there were instances where the author name did not show up in the Gender by Name data set; in these cases, I marked that author 
+                                as having an unknown gender. Discrepancies in my data may have also influenced this – inaccurately recording an author’s first name
+                                might have meant that their name was unidentifiable in the Gender by Name data set.
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Footer -->

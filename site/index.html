@@ -1,14 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <title>NYT Hardcover Fiction Bestsellers Analysis</title>
-    <link rel="stylesheet" href="main.css">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
 </head>
 
-<body style="background-color: #E8D8C4;">
+<body>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
     <!-- Nav bar -->
     <div class="topnav" id="topNav">
         <a class="active" href="index.html">analysis</a>
@@ -18,27 +29,44 @@
 
     <!-- Page content -->
     <div class="content">
-        <h1>What's in a bestseller?</h1>
-        <h1>An analysis of the New York Times hardcover fiction bestseller list (1931-2020)</h1>
 
-        <h3>Introduction</h3>
+        <div class="story-title">
+            <h1> What's in a bestseller?</h1>
+        </div>
 
-        <p> When Chloe Gong’s book, These Violent Delights, made it on the New York Times bestseller list, she said:
+        <div class="story-subtitle">
+            an analysis of the New York Times hardcover fiction bestseller list (1931-2020)
+        </div>
+
+        <div class="story-subtitle" style="font-style: normal;">
+            Aileen Kuang
+        </div>
+        
+        <br>
+
+        <div class="story-text">
+            When Chloe Gong’s book, These Violent Delights, made it on the New York Times bestseller list, she said:
             “the size of my ego when distant relatives brag about their kids going to Ivy League schools and my grandma
             pulls the ‘my granddaughter graduated from an Ivy League as a New York Times bestseller’ card.” Gong’s enthusiastic
             reaction demonstrates the cultural relevance of the Times’ bestseller list – being ranked on the list is a marker of
-            cultural relevance, or excellence. </p>
+            cultural relevance, or excellence.
 
-        <p> However, the logic behind who gets on the bestseller list is clouded, and suggests that it might not be an accurate
+            <br>
+            <br>
+
+            However, the logic behind who gets on the bestseller list is clouded, and suggests that it might not be an accurate
             list at all. According to the New York Times, the data for book sales collected on the list is reported by individual
             book retailers across the country, but the unit sale data is held as confidential. Moreover, according to professor
             Laura B. McGrath, the New York Times’ list has another list working behind the scenes: a list of books that are projected
             to become bestsellers. There is, however, no known methodology behind this list either; in fact, these pre-selected books
             may be manually curated, which introduces the problem of bias and favoritism. And finally, while the New York Times provides
             a short overview of their methods, they do not provide the statistical formulas they use to calculate bestseller rankings.
-            Overall, these three factors demonstrate that there is a high potential for bias in the New York Times bestseller list. </p>
+            Overall, these three factors demonstrate that there is a high potential for bias in the New York Times bestseller list.
 
-        <p> This leads me to the research question at the center of this project: <strong>Are names that are perceived as associated with particular
+            <br>
+            <br>
+
+            This leads me to the research question at the center of this project: <strong>Are names that are perceived as associated with particular
             genders over or underrepresented on the New York Times hardcover fiction bestseller list? </strong> How has that changed over time, if at all? 
             I chose to focus on gender as a contributing factor – specifically, perceptions of gender based on first names – because of the 
             phenomenon of name bias. Studies have shown that job applicants with masculine names are more likely to be called in for an interview 
@@ -46,9 +74,157 @@
             was interested in how name bias could possibly affect these rankings as well. To address this question in this project, I focus on one 
             particular list: the hardcover fiction bestseller list. I also draw upon two data sets: one with book rankings data, and one with data 
             on the associations between different first names and gender. 
-        </p>
+        </div>
 
-        <h3>Conclusion</h3>
+        <div class="story-header">
+            <h3>Male names have dominated the New York Times bestseller list.</h3>
+        </div>
+
+
+        <div class="story-text">
+            We know this -- patriarchy and misogyny influence everything in our world, and it isn't surprising (at least for me) to see it reflected in
+            the New York Times bestseller list. In the beginning of my analysis, I found that -- out of my data set of around seven thousand entries
+            (which included around 7901 authors) -- 4178 were authored by a person with a masculine first name, 2870 were authored by a person with a
+            feminine name, and 853 were found to be unknown or indiscernible through gender. In other words: <strong>52.8 percent</strong> of the authors
+            on this list have masculine sounding names, while only <strong>36.3 percent</strong> have feminine names.
+
+            <br>
+            <br>
+
+            But fret not! According to other projects that have investigated the gender ratio of authors on the New York Times bestseller list, we have
+            made progress over time. According to Rosie Cima, an investigative data journalist who wrote an article for The Pudding on this very topic,
+            "women finally made steady gains on the list" during the 1990s, and in 2001, the split between women and men on the list was fifty-fifty. And
+            I found that this general trend was reflected in my own data analysis. Due to my time constraints and the limits of my own expertise, I took a different
+            approach to analyzing New York Times bestselling titles data, but the key takeaway is similar: it seems that we have been getting closer to gender
+            equality on the bestseller list.
+
+            <br>
+            <br>
+            <br>
+        </div>
+
+
+        <div class="card">
+            <iframe src="overall.html" height="600"></iframe>
+        </div>
+
+        <div class="story-text">
+
+            <br>
+            <br>
+
+            As Cima writes, this is "good news." There are more female bestselling authors now -- isn't that great? At least on first glance, it seems that way.
+            But does this conclusion hold true if we look at different metrics for measuring representation? Specifically, let's take a look at the answers to the following
+            three questions:
+
+            <br>
+            <br>
+
+            <ul>
+                <li><p>Among the book titles that have reached number one on the list, how many of them were authored by people with masculine names?
+                    Feminine names? Names with an indiscernible gender?</p></li>
+                <li><p>Among the book titles that debuted at number one on the list, how many of them were authored by people with masculine names?
+                    Feminine names? Names with an indiscernible gender?</p></li>
+                <li><p>Among the top ten titles that have been on the list for the most weeks each year, how many of them were authored by people with masculine names?
+                    Feminine names? Names with an indiscernible gender?</p></li>
+            </ul>
+
+            <br>
+        </div>
+            
+
+        <br>
+
+        <div class="container">
+            <div class="row row-cols-2">
+                <div class="card">
+                    <h5 class="card-header">Gender balance of authors of #1 bestsellers over time</h5>
+                    <div class="card-body">
+                        
+                            <div class="card-text">
+                                There's no doubt about it -- the number of #1 bestselling authors with feminine names has increased over time. In 1932, out of the
+                                17 authors that had titles ranked first on the bestselling hardcover fiction list, 10 were authors with masculine names, five were
+                                authors with feminine names, and two were authors with names of an indiscernible gender. It is likely that, for that year, around
+                                29% of the #1 bestselling authors were women. In comparison, in 2020, it is likely that 37% percent of the #1 bestselling authors
+                                were women. We are seeing a clear trend towards more female representation among #1 bestselling authors. 
+    
+                                <br>
+                                <br>
+    
+                                This representation is, however, still not enough to be considered gender equality. Authors with masculine names, who are likely to
+                                be men, still make up an overwhelming majority of the #1 bestselling authors on the list.
+                            </div>
+                    </div>
+                </div>
+                <img src="first_rank.png" width="400", height="600">
+            </div>
+        </div>
+
+        <br>
+
+        <div class="container">
+            <div class="row row-cols-2">
+                <img src="debut_first_rank.png" width="300", height="600">
+                <div class="card">
+                    <h5 class="card-header">Gender balance of authors of debut #1 bestsellers over time</h5>
+                    <div class="card-body">
+                            <div class="card-text">
+                                What if we take a look at authors with debut #1 bestsellers? The trend identified previously holds true. Once again, we are seeing a trend
+                                towards more female representation among authors with debut #1 bestsellers on the list. In 1931, all the authors that debuted with a title
+                                at #1 had masculine names, and so were likely men. But in 2020, 7 out of the 19 books on the list that debuted at #1 were authored by people
+                                with feminine names (the rest were authors with masculine names). 
+    
+                                <br>
+                                <br>
+                                
+                                But also, once again, this representation is not enough to be considered gender equality. Authors with masculine names still make up a significant
+                                portion of the debut #1 bestselling authors on the list. 
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="container">
+            <div class="row row-cols-2">
+                <div class="card">
+                    <h5 class="card-header"> Gender balance of top ten bestseller authors over time  </h5>
+                    <div class="card-body">
+                            <div class="card-text">
+                                Finally, we have arrived at the final metric: authors that published books within the top ten books on the list. I measured this for each year by 
+                                sorting the bestselling titles by the number of weeks spent on the list. I then, for each year, took the ten titles that had spent the most time 
+                                on the bestselling books list. 
+    
+                                <br>
+                                <br>
+    
+                                For this metric, still, we see that men dominate. In fact, unlike the last two metrics, there is not even a general trend of improvement over the years.
+                                The gender balance has shifted for some years, but overall, it has remained fairly static: men have authored a majority of the top ten bestselling books
+                                since 1931. 
+                        </div>
+                    </div>
+                </div>
+                <img src="top_ten.png" width="300", height="600", style="float: center;">
+            </div>
+            <br>
+        </div>
+
+        <div class="story-header">
+            <h3> As a society, we have made progress. But we still have a long way to go. </h3>
+        </div>
+
+        <div class="story-text">
+            We've gotten a lot closer to gender equality over the last century. But it is clear that we are not quite there yet. It is fantastic that there are more female authors on the New York
+            Times bestseller list. And it would be even more fantastic if there were more female authors writing the top ten books on the list, reaching #1, or even debuting at #1. 
+            For there to be true equality, women need to be represented, yes. But we need to be represented in more ways than one -- that is, we need to be able to achieve excellence, as well.
+        </div>
+
+        <div class="story-header">
+            <h3> Thinking Ahead: Writing New Stories </h3>
+        </div>
+
     </div>
 
     <!-- Footer -->

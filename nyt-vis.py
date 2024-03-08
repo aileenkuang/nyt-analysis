@@ -182,7 +182,8 @@ fig.update_traces(hovertemplate='%{x}: %{y:.0f}')
 
 # Show the interactive plot
 # fig.show()
-fig.write_html("overall.html")
+with open('overall.html', 'w') as f:
+    f.write(fig.to_html(include_plotlyjs='cdn'))
 
 # Gender of authors that reached first ranking
 # Stacked barplot: male_count on bottom (pink), female_count (blue)
@@ -217,6 +218,8 @@ plt.close()
 # Gender of authors that debuted w/ first ranking
 # Stacked barplot: male_count on bottom (pink), female_count (blue)
 # in middle, unknown_count on top (green)
+
+print(debut_first_df.to_string())
 
 fig, ax = plt.subplots()
 fig.set_size_inches(10, 10)

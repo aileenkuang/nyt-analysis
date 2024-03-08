@@ -1,3 +1,7 @@
+.body {
+    background-color: white;
+}
+
 /* Style top navigation bar */
 .topnav {
     overflow: hidden;
@@ -9,11 +13,12 @@
 .topnav a {
     display: inline-block;
     color: #6D2932;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family:serif;
     text-align: center;
     padding: 14px 16px;
+    margin-top: 20px;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .topnav a:hover {
@@ -38,15 +43,16 @@
 .footer a {
     display: inline-block;
     color: #6D2932;
-    font-family:Verdana, Tahoma, sans-serif;
+    font-family:serif;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .footer a:hover {
     color: #561C24;
+    text-decoration: underline;
 }
 
 .footer a:active {
@@ -57,23 +63,59 @@
 
 .content {
     padding: 14px;
-    font-size: 22px;
+    font-size: 18px;
     margin-left: 125px;
     margin-right: 125px;
     min-height: 100vh;
-    color: #3D0C11;
-    font-family:sans-serif;
+    font-family:serif;
+}
+
+.content h1, h2, h3, h4 {
+    font-family:'Cinzel', serif;
+}
+
+.content .story-title {
+    text-align: center;
+    margin: 0;
+}
+
+.content .story-subtitle {
+    text-align: center;
+    font-style: italic;
+}
+
+.content .story-text {
+    font-family: "Baskerville", serif;
+    max-width: 40rem;
+    margin: 0 auto;
+}
+
+.content .story-header {
+    font-family: 'Cinzel', serif;
+    text-align: center;
+    padding: 3rem;
+}
+
+.content .card {
+    border-color: brown;
+    background-color: #9C254D;
+    color:whitesmoke;
+    max-width: ;
+}
+
+.content .card .card-header {
+    font-family: "Baskerville", serif;
+    font-size: 28px;
+    font-style: italic;
+}
+
+.content .card .card-text {
+    font-family: "Baskerville", serif;
+    font-size: 18px;
+    text-justify: auto;
 }
 
 @media screen and (max-width: 952px) {
-    .landing {
-        padding-top: 20px;
-        padding-bottom: 20px;
-        padding-left: 40px;
-        padding-right: 40px;
-        text-indent: 0;
-    }
-
     .content {
         padding-top: 20px;
         padding-bottom: 20px;
