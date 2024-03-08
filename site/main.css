@@ -55,16 +55,6 @@
 
 /* Style page content */
 
-.landing {
-    background-color: #3D0C11;
-    color: #FFF5E4;
-    margin: -10px;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    text-indent: 150px;
-    font-family:sans-serif;
-}
-
 .content {
     padding: 14px;
     font-size: 22px;

@@ -1,7 +1,7 @@
 import numpy as np
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
-from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
+from matplotlib.ticker import (MultipleLocator)
 import pandas as pd
 from scipy.interpolate import make_interp_spline
 
