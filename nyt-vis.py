@@ -1,6 +1,7 @@
 import numpy as np
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
+from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
 import pandas as pd
 from scipy.interpolate import make_interp_spline
 
@@ -110,17 +111,22 @@ for year in years:
     top_ten_gender_counts.append(gender_counts)
 
 # Gender of authors in top ten
-top_ten_gender_df = pd.DataFrame(top_ten_gender_counts,
-                                 columns=["year", "male_count",
-                                          "female_count", "unknown_count"])
+tt_gender_df = pd.DataFrame(top_ten_gender_counts,
+                            columns=["year", "male_count",
+                                     "female_count", "unknown_count"])
+tt_gender_df.set_index("year", inplace=True)
 
 # Plots
 
-# Gender of authors on the list (overall)
-# Total area chart: male_count on bottom (pink), female_count (blue)
-# in middle, unknown_count on top (green)
+plt.rcParams["font.family"] = "monospace"
+plt.rcParams['axes.spines.top'] = False
+plt.rcParams['axes.spines.bottom'] = False
+plt.rcParams['axes.spines.right'] = False
+plt.rcParams['axes.spines.left'] = False
 
-print(year_gender_df[year_gender_df.index == 1995].to_string)
+# Gender of authors on the list (overall)
+# Line chart: male_count on bottom (pink), female_count (blue)
+# in middle, unknown_count on top (green)
 
 male_counts = year_gender_df['male_count'].values
 female_counts = year_gender_df['female_count'].values
@@ -131,7 +137,6 @@ custom_colors = ["#DE95BA", "#0C359E", "#416D19"]
 x_smooth = np.linspace(year_gender_df.index.min(),
                        year_gender_df.index.max(),
                        300)
-
 df_smooth = pd.DataFrame({
     'male_count': make_interp_spline(year_gender_df.index,
                                      male_counts)(x_smooth),
@@ -156,12 +161,19 @@ fig.add_trace(go.Scatter(x=x_smooth, y=df_smooth["unknown_count"],
                          line=dict(color=custom_colors[2])))
 
 # Customize plot layout
-fig.update_layout(title="Perceived gender of bestseller authors (1931-2020)",
+fig.update_layout(font_family="Courier New",
+                  title="Perceived gender of bestseller authors (1931-2020)",
                   xaxis_title="Year",
                   yaxis_title="Count",
+                  title_font=dict(size=20,
+                                  family="Courier New"),
+                  title_x=0.5,
                   legend=dict(yanchor="top", y=0.99, xanchor="left", x=0.01),
                   hovermode="x unified",
-                  xaxis=dict(tickvals=year_gender_df.index,
+                  plot_bgcolor="#FFF3C7",
+                  xaxis_showgrid=False,
+                  yaxis_showgrid=False,
+                  xaxis=dict(tickvals=[1940, 1960, 1980, 2000, 2020],
                              tickmode="array",
                              tickformat="d")
                   )
@@ -169,7 +181,8 @@ fig.update_layout(title="Perceived gender of bestseller authors (1931-2020)",
 fig.update_traces(hovertemplate='%{x}: %{y:.0f}')
 
 # Show the interactive plot
-fig.show()
+# fig.show()
+fig.write_html("overall.html")
 
 # Gender of authors that reached first ranking
 # Stacked barplot: male_count on bottom (pink), female_count (blue)
@@ -177,22 +190,28 @@ fig.show()
 
 years_list = list(years)
 fig, ax = plt.subplots()
+fig.set_size_inches(10, 10)
+
 ax.bar(years_list, first_rank_df["male_count"], color="#DE95BA",
-       alpha=0.5, label="Male")
+       alpha=1, label="Male")
 ax.bar(years_list, first_rank_df["female_count"],
        bottom=first_rank_df["male_count"], color="#0C359E",
-       alpha=0.8, label="Female")
+       alpha=1, label="Female")
 ax.bar(years_list, first_rank_df["unknown_count"],
        bottom=np.add(first_rank_df["male_count"],
                      first_rank_df["female_count"]),
-       color="#416D19", alpha=0.5, label="Unknown")
+       color="#416D19", alpha=1, label="Unknown")
 
+ax.set_facecolor("#FFF3C7")
 ax.legend()
 
-plt.title("Percieved gender of #1 bestseller authors (1931-2020)")
+plt.title("Percieved gender of #1 bestseller authors (1931-2020)",
+          y=1.05, fontsize=15)
 plt.xlabel("Year")
 plt.ylabel("Count")
+
 # plt.show()
+plt.savefig("first_rank.png")
 plt.close()
 
 # Gender of authors that debuted w/ first ranking
@@ -200,43 +219,76 @@ plt.close()
 # in middle, unknown_count on top (green)
 
 fig, ax = plt.subplots()
-ax.bar(years_list, debut_first_df["male_count"], color="#DE95BA", alpha=0.5,
+fig.set_size_inches(10, 10)
+
+ax.bar(years_list, debut_first_df["male_count"], color="#DE95BA", alpha=1,
        label="Male")
 ax.bar(years_list, debut_first_df["female_count"],
-       bottom=debut_first_df["male_count"], color="#0C359E", alpha=0.8,
+       bottom=debut_first_df["male_count"], color="#0C359E", alpha=1,
        label="Female")
 ax.bar(years_list, debut_first_df["unknown_count"],
        bottom=np.add(debut_first_df["male_count"],
                      debut_first_df["female_count"]),
-       color="#416D19", alpha=0.5, label="Unknown")
+       color="#416D19", alpha=1, label="Unknown")
 
+ax.set_facecolor("#FFF3C7")
 ax.legend()
 
-plt.title("Percieved gender of debut #1 bestseller authors (1931-2020)")
+plt.title("Percieved gender of debut #1 bestseller authors (1931-2020)",
+          y=1.05, fontsize=15)
 plt.xlabel("Year")
 plt.ylabel("Count")
+
 # plt.show()
+plt.savefig("debut_first_rank.png")
 plt.close()
 
 # Gender of authors of top ten books over time
-# Stacked barplot: male_count on bottom (pink), female_count (blue)
+# Stacked area chart: male_count on bottom (pink), female_count (blue)
 # in middle, unknown_count on top (green)
 
 fig, ax = plt.subplots()
-ax.bar(years_list, top_ten_gender_df["male_count"], color="#DE95BA", alpha=0.5,
-       label="Male")
-ax.bar(years_list, top_ten_gender_df["female_count"],
-       bottom=top_ten_gender_df["male_count"], color="#0C359E", alpha=0.8,
-       label="Female")
-ax.bar(years_list, top_ten_gender_df["unknown_count"],
-       bottom=np.add(top_ten_gender_df["male_count"],
-                     top_ten_gender_df["female_count"]),
-       color="#416D19", alpha=0.5, label="Unknown")
+fig.set_size_inches(10, 10)
 
-ax.legend()
+tt_gender_df = tt_gender_df[["male_count", "female_count", "unknown_count"]]
 
-plt.title("Percieved gender of top ten bestseller authors (1931-2020)")
+top_ten_male_ct = tt_gender_df["male_count"]
+top_ten_female_ct = tt_gender_df["female_count"]
+top_ten_unknown_ct = tt_gender_df["unknown_count"]
+
+tt_colors = ["#0C359E", "#416D19", "#DE95BA"]
+
+x_smooth = np.linspace(tt_gender_df.index.min(),
+                       tt_gender_df.index.max(),
+                       300)
+top_smooth = pd.DataFrame({
+    count: make_interp_spline(tt_gender_df.index,
+                              tt_gender_df[count])(x_smooth)
+    for count in tt_gender_df.columns
+    })
+
+plt.stackplot(x_smooth,
+              top_smooth["female_count"],
+              top_smooth["unknown_count"],
+              top_smooth["male_count"],
+              labels=["Female", "Unknown", "Male"],
+              colors=tt_colors)
+
+ax.set_facecolor("#FFFFFF")
+
+handles, labels = ax.get_legend_handles_labels()
+new_order = [2, 0, 1]
+ax.legend([handles[idx] for idx in new_order],
+          [labels[idx] for idx in new_order],
+          loc="upper right")
+ax.xaxis.set_minor_locator(MultipleLocator(1))
+ax.xaxis.limit_range_for_scale(1931, 2020)
+
+plt.title("Percieved gender of top ten bestseller authors (1931-2020)",
+          y=1.05, fontsize=15)
 plt.xlabel("Year")
 plt.ylabel("Count")
+
 # plt.show()
+plt.savefig("top_ten.png")
 plt.close()
