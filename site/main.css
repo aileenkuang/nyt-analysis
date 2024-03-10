@@ -76,7 +76,6 @@
     font-family:'Cinzel', serif;
 }
 
-
 .jumbotron .display-1 {
     color: white;
 }
@@ -134,6 +133,14 @@
     font-family: 'Cinzel', serif;
     text-align: center;
     padding: 3rem;
+}
+
+.content .alert {
+    background-color: #F5DD61;
+    font-family: "Baskerville";
+    color: black;
+    max-width: 40rem;
+    margin: 0 auto;
 }
 
 .content .card {
