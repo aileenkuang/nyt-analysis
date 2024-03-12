@@ -123,6 +123,8 @@ plt.rcParams['axes.spines.top'] = False
 plt.rcParams['axes.spines.bottom'] = False
 plt.rcParams['axes.spines.right'] = False
 plt.rcParams['axes.spines.left'] = False
+plt.rc('xtick', labelsize=16)
+plt.rc('ytick', labelsize=16)
 
 # Gender of authors on the list (overall)
 # Line chart: male_count on bottom (pink), female_count (blue)
@@ -207,19 +209,17 @@ ax.set_facecolor("#FFF3C7")
 ax.legend()
 
 plt.title("Percieved gender of #1 bestseller authors (1931-2020)",
-          y=1.05, fontsize=15)
-plt.xlabel("Year")
-plt.ylabel("Count")
+          y=1.05, fontsize=18)
+plt.xlabel("Year", fontsize=16)
+plt.ylabel("Count", fontsize=16)
 
 # plt.show()
-plt.savefig("first_rank.png")
+plt.savefig("site/img/first_rank.png")
 plt.close()
 
 # Gender of authors that debuted w/ first ranking
 # Stacked barplot: male_count on bottom (pink), female_count (blue)
 # in middle, unknown_count on top (green)
-
-print(debut_first_df.to_string())
 
 fig, ax = plt.subplots()
 fig.set_size_inches(10, 10)
@@ -238,12 +238,12 @@ ax.set_facecolor("#FFF3C7")
 ax.legend()
 
 plt.title("Percieved gender of debut #1 bestseller authors (1931-2020)",
-          y=1.05, fontsize=15)
-plt.xlabel("Year")
-plt.ylabel("Count")
+          y=1.05, fontsize=18)
+plt.xlabel("Year", fontsize=16)
+plt.ylabel("Count", fontsize=16)
 
 # plt.show()
-plt.savefig("debut_first_rank.png")
+plt.savefig("site/img/debut_first_rank.png")
 plt.close()
 
 # Gender of authors of top ten books over time
@@ -288,10 +288,10 @@ ax.xaxis.set_minor_locator(MultipleLocator(1))
 ax.xaxis.limit_range_for_scale(1931, 2020)
 
 plt.title("Percieved gender of top ten bestseller authors (1931-2020)",
-          y=1.05, fontsize=15)
-plt.xlabel("Year")
-plt.ylabel("Count")
+          y=1.05, fontsize=18)
+plt.xlabel("Year", fontsize=16)
+plt.ylabel("Count", fontsize=16)
 
 # plt.show()
-plt.savefig("top_ten.png")
+plt.savefig("site/img/top_ten.png")
 plt.close()
