@@ -127,6 +127,7 @@
     font-family: "Baskerville", serif;
     max-width: 40rem;
     margin: 0 auto;
+    font-size: 16pt;
 }
 
 .content .story-header {
@@ -157,7 +158,7 @@
 
 .content .card .card-text {
     font-family: "Baskerville", serif;
-    font-size: 18px;
+    font-size: 16pt;
     text-justify: auto;
 }
 
